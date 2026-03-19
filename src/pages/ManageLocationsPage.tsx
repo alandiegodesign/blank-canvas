@@ -43,7 +43,7 @@ export default function ManageLocationsPage() {
     enabled: !!eventId,
   });
 
-  const { data: locations = [] } = useQuery({
+  const { data: locations = [] } = useQuery<any[]>({
     queryKey: ['locations', eventId],
     queryFn: () => getLocationsByEvent(eventId!),
     enabled: !!eventId,
@@ -98,7 +98,7 @@ export default function ManageLocationsPage() {
   const [copyingEventId, setCopyingEventId] = useState<string | null>(null);
   const [copyLoading, setCopyLoading] = useState(false);
 
-  const { data: copyLocations = [] } = useQuery({
+  const { data: copyLocations = [] } = useQuery<any[]>({
     queryKey: ['locations', copyingEventId],
     queryFn: () => getLocationsByEvent(copyingEventId!),
     enabled: !!copyingEventId,
@@ -346,7 +346,7 @@ export default function ManageLocationsPage() {
       if (!acc[key]) acc[key] = [];
       acc[key].push(loc);
       return acc;
-    }, {} as Record<string, typeof locations>);
+    }, {} as Record<string, any[]>);
 
   if (loadingEvent) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Carregando...</div>;
   if (!event) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Evento não encontrado</div>;
@@ -543,7 +543,7 @@ export default function ManageLocationsPage() {
             const updates: { id: string; sort_order: number }[] = [];
             let order = individualLocations.length;
             for (const key of reorderedKeys) {
-              for (const loc of groupedLocations[key]) {
+              for (const loc of (groupedLocations[key] as any[])) {
                 updates.push({ id: loc.id, sort_order: order++ });
               }
             }
@@ -558,7 +558,7 @@ export default function ManageLocationsPage() {
             reorderMutation.mutate(updates);
           }}>
             <SortableContext items={Object.keys(groupedLocations)} strategy={verticalListSortingStrategy}>
-              {Object.entries(groupedLocations).map(([type, locs]) => {
+              {(Object.entries(groupedLocations) as [string, any[]][]).map(([type, locs]) => {
                 const label = LOCATION_TYPES.find(t => t.value === type)?.label || type;
                 return (
                   <SortableGroupCard key={type} id={type}>
