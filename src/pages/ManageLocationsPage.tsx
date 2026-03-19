@@ -346,7 +346,7 @@ export default function ManageLocationsPage() {
       if (!acc[key]) acc[key] = [];
       acc[key].push(loc);
       return acc;
-    }, {} as Record<string, typeof locations>);
+    }, {} as Record<string, any[]>);
 
   if (loadingEvent) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Carregando...</div>;
   if (!event) return <div className="min-h-screen flex items-center justify-center text-muted-foreground">Evento não encontrado</div>;
