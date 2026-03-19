@@ -558,7 +558,7 @@ export default function ManageLocationsPage() {
             reorderMutation.mutate(updates);
           }}>
             <SortableContext items={Object.keys(groupedLocations)} strategy={verticalListSortingStrategy}>
-              {Object.entries(groupedLocations).map(([type, locs]) => {
+              {(Object.entries(groupedLocations) as [string, any[]][]).map(([type, locs]) => {
                 const label = LOCATION_TYPES.find(t => t.value === type)?.label || type;
                 return (
                   <SortableGroupCard key={type} id={type}>
