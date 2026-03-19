@@ -43,7 +43,7 @@ export default function ManageLocationsPage() {
     enabled: !!eventId,
   });
 
-  const { data: locations = [] } = useQuery({
+  const { data: locations = [] } = useQuery<any[]>({
     queryKey: ['locations', eventId],
     queryFn: () => getLocationsByEvent(eventId!),
     enabled: !!eventId,
