@@ -543,7 +543,7 @@ export default function ManageLocationsPage() {
             const updates: { id: string; sort_order: number }[] = [];
             let order = individualLocations.length;
             for (const key of reorderedKeys) {
-              for (const loc of groupedLocations[key]) {
+              for (const loc of (groupedLocations[key] as any[])) {
                 updates.push({ id: loc.id, sort_order: order++ });
               }
             }
