@@ -98,7 +98,7 @@ export default function ManageLocationsPage() {
   const [copyingEventId, setCopyingEventId] = useState<string | null>(null);
   const [copyLoading, setCopyLoading] = useState(false);
 
-  const { data: copyLocations = [] } = useQuery({
+  const { data: copyLocations = [] } = useQuery<any[]>({
     queryKey: ['locations', copyingEventId],
     queryFn: () => getLocationsByEvent(copyingEventId!),
     enabled: !!copyingEventId,
