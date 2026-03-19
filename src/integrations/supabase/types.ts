@@ -14,7 +14,286 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      events: {
+        Row: {
+          banner_image: string | null
+          created_at: string
+          created_by: string
+          date: string
+          deleted_at: string | null
+          description: string
+          end_date: string | null
+          end_time: string | null
+          id: string
+          is_visible: boolean
+          location_address: string | null
+          location_name: string | null
+          map_image: string | null
+          policies: Json | null
+          sales_end_time: string | null
+          tags: Json | null
+          time: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          banner_image?: string | null
+          created_at?: string
+          created_by: string
+          date: string
+          deleted_at?: string | null
+          description?: string
+          end_date?: string | null
+          end_time?: string | null
+          id?: string
+          is_visible?: boolean
+          location_address?: string | null
+          location_name?: string | null
+          map_image?: string | null
+          policies?: Json | null
+          sales_end_time?: string | null
+          tags?: Json | null
+          time?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          banner_image?: string | null
+          created_at?: string
+          created_by?: string
+          date?: string
+          deleted_at?: string | null
+          description?: string
+          end_date?: string | null
+          end_time?: string | null
+          id?: string
+          is_visible?: boolean
+          location_address?: string | null
+          location_name?: string | null
+          map_image?: string | null
+          policies?: Json | null
+          sales_end_time?: string | null
+          tags?: Json | null
+          time?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      order_items: {
+        Row: {
+          created_at: string
+          id: string
+          order_id: string
+          quantity: number
+          subtotal: number
+          ticket_location_id: string
+          unit_price: number
+          updated_at: string
+          validation_code: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          order_id: string
+          quantity?: number
+          subtotal?: number
+          ticket_location_id: string
+          unit_price?: number
+          updated_at?: string
+          validation_code?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          order_id?: string
+          quantity?: number
+          subtotal?: number
+          ticket_location_id?: string
+          unit_price?: number
+          updated_at?: string
+          validation_code?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "order_items_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: false
+            referencedRelation: "orders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "order_items_ticket_location_id_fkey"
+            columns: ["ticket_location_id"]
+            isOneToOne: false
+            referencedRelation: "ticket_locations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      orders: {
+        Row: {
+          created_at: string
+          event_id: string
+          id: string
+          status: string
+          stripe_session_id: string | null
+          total_amount: number
+          updated_at: string
+          user_id: string
+          validated_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_id: string
+          id?: string
+          status?: string
+          stripe_session_id?: string | null
+          total_amount?: number
+          updated_at?: string
+          user_id: string
+          validated_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_id?: string
+          id?: string
+          status?: string
+          stripe_session_id?: string | null
+          total_amount?: number
+          updated_at?: string
+          user_id?: string
+          validated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          cpf: string | null
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          phone: string | null
+          updated_at: string
+          user_id: string
+          user_type: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          cpf?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+          user_type?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          cpf?: string | null
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+          user_type?: string
+        }
+        Relationships: []
+      }
+      ticket_locations: {
+        Row: {
+          available_quantity: number
+          color: string | null
+          created_at: string
+          description: string | null
+          event_id: string
+          group_size: number
+          id: string
+          is_active: boolean
+          is_sold_out: boolean
+          location_type: string
+          name: string
+          price: number
+          quantity: number
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          available_quantity?: number
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          event_id: string
+          group_size?: number
+          id?: string
+          is_active?: boolean
+          is_sold_out?: boolean
+          location_type: string
+          name: string
+          price?: number
+          quantity?: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          available_quantity?: number
+          color?: string | null
+          created_at?: string
+          description?: string | null
+          event_id?: string
+          group_size?: number
+          id?: string
+          is_active?: boolean
+          is_sold_out?: boolean
+          location_type?: string
+          name?: string
+          price?: number
+          quantity?: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ticket_locations_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +302,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user" | "atendente" | "desenvolvedor"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +429,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user", "atendente", "desenvolvedor"],
+    },
   },
 } as const
