@@ -1,9 +1,9 @@
 import { supabase } from '@/integrations/supabase/client';
+import { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 
-export type Event = any;
-export type EventInsert = any;
-export type EventUpdate = any;
-
+export type Event = Tables<'events'>;
+export type EventInsert = TablesInsert<'events'>;
+export type EventUpdate = TablesUpdate<'events'>;
 
 export async function getEvents(): Promise<Event[]> {
   const today = new Date().toISOString().slice(0, 10);

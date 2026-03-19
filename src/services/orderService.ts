@@ -1,9 +1,9 @@
 import { supabase } from '@/integrations/supabase/client';
+import { Tables } from '@/integrations/supabase/types';
 import { decreaseAvailability } from './ticketLocationService';
 
-export type Order = any;
-export type OrderItem = any;
-
+export type Order = Tables<'orders'>;
+export type OrderItem = Tables<'order_items'>;
 
 export interface CartItem {
   ticket_location_id: string;
