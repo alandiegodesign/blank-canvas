@@ -1,9 +1,9 @@
 import { supabase } from '@/integrations/supabase/client';
-import { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 
-export type TicketLocation = Tables<'ticket_locations'>;
-export type TicketLocationInsert = TablesInsert<'ticket_locations'>;
-export type TicketLocationUpdate = TablesUpdate<'ticket_locations'>;
+export type TicketLocation = any;
+export type TicketLocationInsert = any;
+export type TicketLocationUpdate = any;
+
 
 export type LocationType = 'pista' | 'vip' | 'camarote' | 'camarote_grupo' | 'bistro' | 'sofa';
 
